@@ -1,0 +1,153 @@
+---
+title: "Ayçiçek Yağı, Zeytinyağı ve Palm Yağı İhracatları Üzerine Tahmin"
+author: 
+  - Esra Çalışgan[^1]
+bibliography: ../bibliography/biblio.bib
+csl: ../csl/apa-tr.csl
+header-includes:
+  - \usepackage{polyglossia}
+  - \setmainlanguage{turkish}
+  - \usepackage{booktabs}
+  - \usepackage{caption} 
+  - \captionsetup[table]{skip=10pt}
+output:
+  bookdown::pdf_document2:
+    fig_caption: yes
+    fig_height: 3
+    fig_width: 4
+    keep_tex: no
+    latex_engine: xelatex
+    number_sections: yes
+    toc: no
+geometry: margin=1in
+link-citations: yes
+urlcolor: blue
+fontsize: 12pt
+biblio-style: apalike
+abstract: |
+ Hem yemek pişirmede hem de ihracatta çok önemli rol oynayan bitkisel yağlar günümüzde vazgeçilmez bir tüketim ürünüdür.Bu çalışmada Amerika Birleşik Devletleri Tarım Bakanlığı (USDA) resmi ihracat verileri kullanılarak ayçiçekyağı zeytinyağı ve palm yağı ihracat rakamlarının tahmin edilip hedeflenmesi yönünde çalışmalar yapılmıştır.Bu çalışma da ihracat oranlarının ANOVA modeli ile tahmin edilmesi hedeflenmiştir.Bu doğrultuda usda.gov adlı siteden alınan veri seti kullanılmıştır.Veri seti üzerinde grafik ve analiz için ufak değişiklikler yapılmıştır.Veri setinin 2015 ve 2022 yılları arasında ayçiçek yağı zeytinyağı ve palm yağı ihracat miktarlarını kapsadığı göz önünde bulundurularak Tek Yönlü ANOVA analizi kullanılarak tahmin yapılması hedeflenmiştir. Uygulanan varyans analizi sonucunda bahsettiğimiz üç yağın ihracatının azalma eğilimi gösterdiği öngörülmüştür.
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = FALSE, echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+<!-- ======================================================================= -->
+<!-- ============================== NOTLAR ================================= -->
+<!-- ======================================================================= -->
+[^1]: 21080296, [Github Repo](https://github.com/esracalisgan17/final)
+
+
+# Giriş
+Bitkisel yağ, bitkilerden elde edilen yağdır. Bitkisel yağlar yiyeceklerde ve yemek pişirmek amacıyla kullanılırlar. Bitkisel yağ üretiminde kullanılan en önemli bitkiler soya, palmiye yağı, kolza, kanola, zeytin ve ayçiçeği ile yer fıstığıdır (yer fıstığı yağı) (@Wikipedia:2021). Bu çalışmada bitkisel yağlardan en popüler olan üç farklı yağın ihracatıyla ilgili veriler incelenerek bu veriler ışığında bazı tahminler yapılması hedeflenmektedir. İhracat ya da dışsatım, bir malın veya hizmetin yurt dışındaki alıcılara satılmasıdır. Devletler, tüzel kişilikler ve gerçek kişilikler tarafından gerçekleştirilir. İthalatın karşıtıdır ve dış ticaret dengesini oluşturan etkenlerden biridir (@Vikipedi:2022). Söz konusu verilerdeki üç yağdan birincisi olan ayçiçek yağı ayçiçeği bitkisinin çekirdeklerinden diğer bir deyişle tohumlarından elde edilen açık sarı renkli ve hafif tadı olan bitkisel bir yağdır (@Wikipedia:2022). İkinci incelenecek yağ çeşidi zeytinyağı. Zeytinyağı rengi yeşilimsi ve sarımtırak arası değişebilmektedir. Rengin değişken olması yapısında bulundurduğu maddeler sonucudur (@Wikipedia:2023). Üçüncü ve son yağ çeşidi olan Palm yağı, palmiye yağı veya hurma yağı, palmiye meyvesinden elde edilen bir yarı katı bitkisel yağdır (@Vikipedia:2022).
+
+Yağ dünyada vazgeçilmez bir tüketim ürünüdür. Bu çalışmada GATS (General Agreement on Trade in Services) resmi ihracat verileri kullanılarak yukarıda bahsedilen önemli ürünlerin ihracat rakamlarının öngörülmesi hedeflenmekte olup aynı zamanda yağ ticaretinin dünya çapında bulunduğu durumlar çeşitli yönleriyle ele alınarak sistematik birikim içerisinde gelecek yıllarla ilgili fikir yürütülmeye çalışılacaktır.
+
+## Çalışmanın Amacı
+2015 ve 2022 yılları arasında 76 ülkenin Ayçiçek yağı, zeytinyağı ve palm yağı ihracatları incelenerek bu ülkelerin 2023 yılı ihracatları öngörülecektir. Bu çalışmadan elde edilen bulgularla ülkelerdeki bu yağların üretim ve satış düzeyleri ile ilgili fikir sahibi olunabilecektir. Ek olarak bu öngörülerin ülkelerin bitkisel yağ ticaretiyle ilgili politikalarını da belirlemesine yardımcı olması hedeflenmektedir.
+
+## Literatür 
+
+Literatür taraması sonucunda bu yağların ihracatını etkileyen faktörlerin ele alındığı çok sayıda çalışmaya rastlanmıştır. @Campbell:1983 çalışmasında ayçiçek yağını, kullanımını ve ürünlerdeki uygulamalarını ve kullanımı ile ilgili avantaj ve sorunları açıklamaktadır. @Carter:2007 ise yaptığı çalışmada, hurma yağı piyasası dengesindeki son eğilimleri ve hurma yağı temellerinin gelecekteki beklentilerini ele almaktadır. Çalışma, nispeten ucuz bir biyoyakıt (palmiye biyodizel veya doğrudan yanma için) olarak ortaya çıkan talep nedeniyle ve kısmen de fiyat avantajları nedeniyle hurma yağı ve ürünlerine olan talebin oldukça hızlı bir şekilde artma potansiyeli olduğunu ortaya koymaktadır. 
+
+@Kashiwagi:2020 makalesinde Akdeniz ülkelerinde zeytinyağı ihracatını ve ithalatını etkileyen faktörleri incelemektedir. @Onurlubaş:2007 ise Türkiye'deki bitkisel yağ sanayine ilişkin izlenilen politikalar, yapılan uygulamalar ve bunların sonuçlarına değinilmiştir.
+
+# Veri 
+
+Bu çalışmada 2015-2022 yıllarını kapsayan zaman diliminden oluşan bir veri kullanılmıştır. Bu veri seti USDA adlı sitesinde oluşturulmuştur bir veri setidir. Veri seti ayçiçek yağı zeytinyağı ve palm yağının bahsedilen yıllarda 76 ülkenin ihracattı ile ilgili verileri sağlar.kullanılan veri seti üzerinde grafik analizi için ufak değişiklikler yapılarak veri seti üzerinden analiz yapılmıştır.
+
+```{r, include=FALSE}
+library(tidyverse)
+library(here)
+oil <- read_csv(here("../data/oil.csv"))
+```
+
+```{r, echo=FALSE}
+library(xtable)
+library(summarytools)
+st_options(lang = "tr")
+```
+
+```{r results='asis', echo=FALSE}
+oil %>%
+  select("2015", "2016", "2017", "2018", "2019", "2020") %>% 
+  descr(stats = c("mean", "sd", "min", "med", "max"), transpose = TRUE) %>% 
+  xtable(caption = "Özet İstatistikler",
+         label = "tab:ozet",
+         align = c("l", "c", "c", "c", "c", "c")) %>% 
+  print(booktabs = TRUE, comment = FALSE, caption.placement = "top")
+```
+
+Tablo \ref{tab:ozet}, seçili bitkisel yağ ihracatlarının 76 ülke için 2015-2020 yılları arasındaki ortalama değerlerini, minimum, medyan ile maksimum değerlerinin ve standart sapmalarını göstermektedir.
+
+Tablo \ref{tab:ozet}’de görüldüğü üzere 2015-2018 yılları arasında ülkelerin yağ ihracatı için ödediği miktarlar artış gösterirken 2019 yılından itibaren düşüş görülmüştür. Özellikle pandemi dönemini izleyen dönemlerde gözlenen düşüş, pandemi dönemi ile bu ticaret arasında bir korelasyon olabilme ihtimalini de beraberinde getiriyor. Aynı zamanda ortalama ihracat düzeyi 500.000 dolar civarındayken maksimum noktalardaki ihracat 30 milyon dolara kadar çıkmaktadır. Bu aykırı gibi gözüken değerler aslına bakıldığında belli başlı ülkelerin bu ticaretin devleri olarak ticaret sahnesinde yer aldığını da açık olarak ortaya koymaktadır.
+
+
+# Yöntem ve Veri Analizi
+```{r barplot, fig.align='center', fig.cap='Ürün Çeşidine Göre İhracat Oranları', echo=FALSE}
+library(ggplot2)
+ggplot(oil, aes(x=Product, y=2020)) + 
+  geom_bar(stat = "identity")
+```
+
+Şekil \@ref(fig:barplot)’de  ürün çeşidine göre ihracat oranları grafiğini incelediğimizde zeytinyağı ihracatının daha fazla olduğu görülmüştür. Bu konudaki Güneydoğu Avrupa Ekonomi Dergisinde yayımlanan AB zeytinyağı ticaretinde ülke pazar gücü başlıklı yazıdada değinildiği gibi zeytinyağı ihracatı AB pazarında rekabetçi görülmediği için daha yüksek pazar gücüne sahip olduğu görülmüştür (@Tasdogan:2005).
+
+Zeytinyağı ve ayçiçekyağının gerisinde kalan ve nispeten ucuz sayılan palm yağınada olan talebin oldukça hızlı bir şekilde artma potansiyeli olduğu Palmiye yağı piyasaları ve gelecekteki arz başlıklı makalede açıkça belirtilmiştir (@Carter:2007).
+
+Bu çalışmada Dünya ülkelerinin zeytinyağı, ayçiçek yağı ve palm yağı ihracat oranları Tek Yönlü ANOVA (One-Way Analysis of Variance) yöntemi ile tahmin edilmiştir. Verilerin daha detaylı olabilmesi adına USDA resmi sitesinden alınan ülkelere göre veriler grafik ve tablolarda kullanılırken ANOVA için ise bölgelere göre düzenlenmiş daha toplu bir veri kullanılmıştır.
+
+ANOVA (Analysis of Variance), birçok grup arasındaki farkların istatistiksel olarak anlamlı olup olmadığını değerlendirmek için kullanılan bir istatistiksel modeldir. Genellikle, gruplar arasındaki ortalamaların farklı olup olmadığını belirlemek için kullanılır. ANOVA modeli, bir bağımlı değişkenin (genellikle sürekli bir değişken) birden fazla bağımsız değişken tarafından etkilendiği durumlar için uygundur. Bu model, gruplar arasındaki farklılıkları, grup içindeki değişkenliklerle karşılaştırarak değerlendirir.
+
+Varyans analizinin uygulanabilmesi için örneklem ana kütlesinin sahip olması gereken bazı özellikler bulunmaktadır. Her bir grubun normal dağılım sergilemesi, örneklerin bağımsız ve varyanslarının eşit olması istenmektedir. ANOVA analizinde kullanılan F testi hipotezi şöyle oluşturulur (@Şenoğlu:2020):
+
+$$
+H_0 : \mu_0 = \mu_2 = \mu_3 = … = \mu_N
+$$
+
+Bu denklem bize ortalamalar arasında fark olmadığını göstermektedir. $H_1$ ise en az iki ortalama arasında fark olduğunu gösterir. Sonrasında test istatistiği gereklidir. Varyans analizinde temel amaç, ikiden fazla örnek için örnek ortalamalarının genel ortalamadan sapmalarının kareler toplamını, sapmaya yol açan etkileri ayırmak ve analiz etmektir. İki faktörlü varyans analizi modeli şu şekilde gösterilmektedir:
+
+$$
+X_{ijk} = \mu + \alpha_{i} + \beta_{j} + \alpha \beta_{ij} + \epsilon_{ijk}
+$$
+
+Burada $\mu$, genel ortalamayı; $\alpha_{i}$ ilk faktör etkisini; $\beta_{j}$ ikinci faktörün etkisini ve $\alpha \beta_{ij}$ ortak etkiyi ifade ederken, $\epsilon_{ijk}$ hata terimini açıklamaktadır. 
+
+Tek yönlü varyans analizini yaptığımızda anlamlı olmayan bir p değeri elde ederiz (0,05’ten büyük).
+
+```{r, include=FALSE}
+library(tidyverse)
+library(here)
+oill <- read_csv(here("../data/oill.csv"))
+```
+
+```{r aov, echo=FALSE}
+oil.aov <- aov(twothousandtwenty ~ Product, data = oill) 
+oneway.test(twothousandtwenty ~ Product, data = oill, var.equal = TRUE)
+```
+
+Analizi ilerlettiğimiz zaman F değerini elde ederiz. F değeri İki ya da daha fazla örneklem ortalamasının farklı $\mu$’leri temsil edip etmediğini belirlemek için tüm örneklem ortalamalarının aynı anda karşılaştırılmasını sağlar. Hesaplanan F değeri, belli alfa düzeyi ve serbestlik derecesine göre belirlenen kritik değer (tablo değeri) ile karşılaştırılarak karar verilir. Hesaplanan F değeri manidar değilse, örneklem ortalamalarından herhangi ikisi arasında manidar farklılık olmadığını ve tüm ortalamaların aynı $\mu$’yü temsil ettiğini gösterir. Hesaplanan F değeri, manidar ise ortalamalar arasında en az bir farkın manidar olduğunu, yani en az iki ortalamanın farklı $\mu$’leri temsil ettiğini gösterir. Bu durumda, bu farkın hangi ortalamalar arasında olduğunu anlamak için ikili karşılaştırmalar yapılır (çoklu karşılaştırma testleri (post hoc test)) (@Tavşancıl:2018).
+
+```{r summ, echo=FALSE}
+summary(oil.aov)
+```
+
+Analiz, her ne kadar grupların ortalamalarının farklı olup olmadığını söylese de hangi grupların farklı olduğunu belirlemez ve farklılıklarını bildirmez. Bu farklılıkları ayırt edebilmek için Tukey analizi farklılıkları hesaplayabilir (@Tavşancıl:2018).
+
+```{r , echo=FALSE}
+TukeyHSD(oil.aov)
+```
+
+Çıktıdaki her satır, grubun ortalamaları arasındaki farkı (diff) ve fark için güven aralığının alt ve üst (lwr ve upr) sınırlarını içerir.
+
+# Sonuç
+Bu bitkisel yağ ihracattlarını etkileyen sebeplerin başında da günlük hayatın her alanında kullanılıyor olması gelmektedir. İnsan yaşamı devam ettiği sürece gıdadan kozmetiğe ve daha birçok alanda tükettilmeye devam edecektir.
+
+Bu çalışmada 76 ülkenin 2015-2022 yılları aralığında gerçekleştirdikleri ihracat miktarlarını tahmin eden en uygun ANOVA modelinin ortaya konması hedeflenmiştir. Bu doğrultuda USDA adlı siteden alınan veri kullanılmıştır. 3 adet grubu olması tek yönlü ANOVA modelinin kullanılmasına karar verilmesine sebep olmuştur. Analizde bu üç grup ikişerli gruplar halinde kıyaslanarak aralarındaki değerler karşılaştırılmıştır aralarındaki fark detaylandırılmak için Tukey analizinden yardım alınmıştır.
+
+Bitkisel yağ ihracatının geleceği ile ilgili birkaç olası eğilim olabilir. Bunlar: artan talep, büyüyen pazarlar, sürdürebilirlik ve çevresel endişelerdir. Özelikle sağlıklı beslenme trendinin empoze edilmesi sebebiyle trans yağ içeriği düşük ve doymamış yağ asitleri bakımından zengin olan bitkisel yağlar tercih edilebilir ayrıca artan nüfus ve değişen gelir oranları da bitkisel yağlara olan talebi etkiler.  Ancak bu faktörler ihracatı etkilerken tam olarak şekilendirmez. Piyasa koşulları ekonomik ve politik gelişmeler en büyük etkendir.
+
+
+\newpage
+# Kaynakça {#references}
+<div id="refs"></div>
+
